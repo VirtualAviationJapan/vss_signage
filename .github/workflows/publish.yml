@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     concurrency:
       group: pages
@@ -35,5 +35,16 @@ jobs:
         with:
           path: dist
 
-      - id: deployment
-        uses: actions/deploy-pages@v2
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/deploy-pages@v1
+        id: deployment
