@@ -6,23 +6,35 @@ import * as path from "path";
 const IMAGE_SIZE = ATLAS_SIZE / 2;
 
 // スライドショーの画像を処理する関数
-async function createSlideshowAtlas(setDir) {
+async function createSlideshowAtlas(dir) {
     try {
-        await fs.mkdir(path.join(OUTPUT_DIR, setDir), { recursive: true });
-        const slides = await fs.readdir(setDir);
+        await fs.mkdir(path.join(OUTPUT_DIR, dir), { recursive: true });
+        const slides = await fs.readdir(path.join(dir,'A'));
         const slideNumbers = [...new Set(slides.map(slide => slide.match(/slide(\d+)/)[1]))];
 
         await Promise.all(slideNumbers.map(async (slideNumber) => {
-            const imageFiles = await fs.readdir(setDir);
-            // imagesはリポジトリルートからのパスにするため、setDirを結合する
-            // 例: setDir = 'slideshow/set01', file = 'slide01A.png' => 'slideshow/set01/slide01A.png'
-            const images = imageFiles.map(file => `${setDir}/${file}`).filter(file => file.includes(`slide${slideNumber}`));
-            const outputPath = `${OUTPUT_DIR}/${setDir}/slide${slideNumber}.png`
+            const images = [];
+            const imagePaths = [
+                path.join(dir, 'A', `slide${slideNumber}.png`),
+                path.join(dir, 'B', `slide${slideNumber}.png`),
+                path.join(dir, 'C', `slide${slideNumber}.png`),
+                path.join(dir, 'D', `slide${slideNumber}.png`)
+            ];
+
+            for (const imagePath of imagePaths) {
+                try {
+                    await fs.access(imagePath);
+                    images.push(imagePath);
+                } catch (err) {
+                    // ファイルが存在しない場合は何もしない
+                }
+            }
+            const outputPath = path.join(OUTPUT_DIR, dir, `slide${slideNumber}.png`);
             console.log(images, outputPath);
             await createAtlas(images, outputPath);
         }));
     } catch (error) {
-        console.error(`Error creating slideshow atlas for ${setDir}:`, error);
+        console.error(`Error creating slideshow atlas for ${dir}:`, error);
     }
 }
 
