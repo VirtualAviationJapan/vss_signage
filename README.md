@@ -9,13 +9,13 @@ GitHub Actionsにより、画像を自動でアトラス化してGitHub Pagesに
 ※基礎的なGit(hub)の操作知識を要します。gitが分からない、初めて使う場合はワールド班にお問い合わせください。
 ### スライドショー
 1. `slideshow/set01/A/` に画像を配置します。  
-   このとき、画像は `slide01.png`, `slide02.png`, ... のように連番で配置してください。
-   ファイル名は必ず `slide（連番）.png` の形にしてください。
-2. `B`、`C`、`D` フォルダにも同様に画像を配置します。この時、`A-D`間の画像の枚数は必ず揃えるようにし、想定枚数が揃わない場合は
+   このとき、画像ファイル名は `slide（連番）.png` の形にしてください。大文字小文字も区別されるので注意。  
+   ※例： `slide01.png`, `slide02.png`, `slide03.png`, ...
+3. `B`、`C`、`D` フォルダにも同様に画像を配置します。この時、`A-D`間の画像の枚数は必ず揃えるようにし、想定枚数が揃わない場合は
    デフォルト柄、または同じ画像を別の番号で追加するなどしてください。
-3. Git push します。
-4. GitHub Actionsが自動で処理します。
-5. https://virtualaviationjapan.github.io/vss_signage/slideshow/set01/slide01.png に公開されます。
+4. Git push します。
+5. GitHub Actionsが自動で処理します。
+6. https://virtualaviationjapan.github.io/vss_signage/slideshow/set01/slide01.png に公開されます。
    02, 03, ... についても同様です。
 
 **補足：画像のフォルダ連番が欠けた時の挙動**  
