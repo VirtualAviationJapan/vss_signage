@@ -27,19 +27,19 @@ GitHub Actionsにより、画像を自動でアトラス化してGitHub Pagesに
 ### 固定掲示
 1. `fixed/` に画像を配置します。  
    画像の内容ごとに、以下のファイル命名に沿って名前を設定、配置してください。大文字小文字も区別されるので注意。   
-- 注意事項日本語：
-- 注意事項英語：
-- 推奨パフォーマンス設定：
-- 出発案内：
-- 広報固定表示ポスターA：
-- 広報固定表示ポスターB：
-- 広報固定表示ポスターC：
-- 広報固定表示ポスターD：
+- 注意事項日本語：caution_jp.png
+- 注意事項英語：caution_en.png
+- 推奨パフォーマンス設定：performanceSettings.png
+- 出発案内：departuresBoard.png
+- 広報固定表示ポスターA：poster_A.png
+- 広報固定表示ポスターB：poster_B.png
+- 広報固定表示ポスターC：poster_C.png
+- 広報固定表示ポスターD：poster_D.png
 2. Git push します。
 3. GitHub Actionsが自動で処理します。
 4. 以下のURLに公開されます。
-- 注意事項、出発案内：https://virtualaviationjapan.github.io/vss_signage/fixed/sample.png
-- 広報固定表示ポスター：2つ目のURL
+- 注意事項、出発案内：https://virtualaviationjapan.github.io/vss_signage/fixed/signage1.png
+- 広報固定表示ポスター：https://virtualaviationjapan.github.io/vss_signage/fixed/signage2.png
 ### 固定表示のコンフィグ（枚数、ファイルパス）変更  
   **注意：通常はこの操作を行わないでください。**  
   ここを触る場合、おそらくワールドビルドを必要とします。ワールド班にお問い合わせください。  
