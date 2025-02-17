@@ -11,11 +11,12 @@ GitHub Actionsにより、画像を自動でアトラス化してGitHub Pagesに
 1. `slideshow/set01/A/` に画像を配置します。  
    このとき、画像ファイル名は `slide（連番）.png` の形にしてください。大文字小文字も区別されるので注意。  
    ※例： `slide01.png`, `slide02.png`, `slide03.png`, ...
-3. `B`、`C`、`D` フォルダにも同様に画像を配置します。この時、`A-D`間の画像の枚数は必ず揃えるようにし、想定枚数が揃わない場合は
-   デフォルト柄、または同じ画像を別の番号で追加するなどしてください。
-4. Git push します。
-5. GitHub Actionsが自動で処理します。
-6. https://virtualaviationjapan.github.io/vss_signage/slideshow/set01/slide01.png に公開されます。
+2. `B`、`C`、`D` フォルダにも同様に画像を配置します。この時、`A-D`間の画像の枚数は必ず揃えるようにし、想定枚数が揃わない場合は
+   デフォルト柄、または同じ画像を別の番号で追加するなどしてください。  
+   ※例：`A`,`B`,`C`が10枚、`D`が8枚なら`D`の`slide09`,`slide10`にはデフォルト柄を使うか、2回表示するポスターを「もう1枚」、正しく名前をつけてアップロード
+3. Git push します。
+4. GitHub Actionsが自動で処理します。
+5. https://virtualaviationjapan.github.io/vss_signage/slideshow/set01/slide01.png に公開されます。
    02, 03, ... についても同様です。
 
 **補足：画像のフォルダ連番が欠けた時の挙動**  
@@ -25,27 +26,27 @@ GitHub Actionsにより、画像を自動でアトラス化してGitHub Pagesに
    
 ### 固定掲示
 1. `fixed/` に画像を配置します。  
-   画像の内容ごとに、以下のファイル命名に沿って名前を設定、配置してください。  
-- 注意事項日本語：
-- 注意事項英語：
-- 推奨パフォーマンス設定：
-- 出発案内：
-- 広報固定表示ポスターA：
-- 広報固定表示ポスターB：
-- 広報固定表示ポスターC：
-- 広報固定表示ポスターD：
+   画像の内容ごとに、以下のファイル命名に沿って名前を設定、配置してください。大文字小文字も区別されるので注意。   
+- 注意事項日本語：caution_jp.png
+- 注意事項英語：caution_en.png
+- 推奨パフォーマンス設定：performanceSettings.png
+- 出発案内：departuresBoard.png
+- 広報固定表示ポスターA：poster_A.png
+- 広報固定表示ポスターB：poster_B.png
+- 広報固定表示ポスターC：poster_C.png
+- 広報固定表示ポスターD：poster_D.png
 2. Git push します。
 3. GitHub Actionsが自動で処理します。
 4. 以下のURLに公開されます。
-- 注意事項、出発案内：https://virtualaviationjapan.github.io/vss_signage/fixed/sample.png
-- 広報固定表示ポスター：2つ目のURL
+- 注意事項、出発案内：https://virtualaviationjapan.github.io/vss_signage/fixed/signage1.png
+- 広報固定表示ポスター：https://virtualaviationjapan.github.io/vss_signage/fixed/signage2.png
 ### 固定表示のコンフィグ（枚数、ファイルパス）変更  
   **注意：通常はこの操作を行わないでください。**  
   ここを触る場合、おそらくワールドビルドを必要とします。ワールド班にお問い合わせください。  
   
-   `const.js`を編集します。  
-   `FIXED_SIGNAGES`は固定掲示する画像に関するオブジェクトの配列です。  
-   `name`は生成される画像のファイル名です。`images`はリポジトリルートからのファイルパスの配列です。
+  1.  `const.js`を編集します。  
+  2.  `FIXED_SIGNAGES`は固定掲示する画像に関するオブジェクトの配列です。  
+  3.  `name`は生成される画像のファイル名です。`images`はリポジトリルートからのファイルパスの配列です。
    ```json
    {
      "name": "sample.png",

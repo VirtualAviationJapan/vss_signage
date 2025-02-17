@@ -5,14 +5,19 @@ export const FIXED_SIGNAGES = [
     {
         name: 'signage1.png',
         images: [
-            'fixed/caution1.jpg',
-            'fixed/caution2.jpg',
+            'fixed/caution_jp.png',
+            'fixed/caution_en.png',
+            `fixed/performanceSettings.png`
             'fixed/departuresBoard.png'
         ]
     },
     {
         name: 'signage2.png',
         images: [
+            `fixed/poster_A.png`
+            `fixed/poster_B.png`
+            `fixed/poster_C.png`
+            `fixed/poster_D.png`
         ]
     }
 ]
