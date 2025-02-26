@@ -3,8 +3,6 @@ import { OUTPUT_DIR, ATLAS_SIZE, DEFAULT_IMAGE, FIXED_SIGNAGES } from './const.j
 import fs from 'fs/promises';
 import * as path from "path";
 
-const IMAGE_SIZE = ATLAS_SIZE / 2;
-
 // スライドショーの画像を処理する関数
 async function createSlideshowAtlas(dir) {
     try {
@@ -75,7 +73,7 @@ async function createAtlas1(images, outputPath) {
         const width  = Math.ceil( ATLAS_SIZE );
         const height = Math.ceil( ATLAS_SIZE );
         const resizedImages = await Promise.all(images.map(image =>
-            resizeImage(image, IMAGE_SIZE, IMAGE_SIZE)
+            resizeImage(image, ATLAS_SIZE, ATLAS_SIZE)
         ));
 
         await sharp({
