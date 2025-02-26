@@ -43,7 +43,8 @@ GitHub Actionsにより、画像を自動でアトラス化してGitHub Pagesに
 3. GitHub Actionsが自動で処理します。
 4. 以下のURLに公開されます。
 - 注意事項、出発案内：https://virtualaviationjapan.github.io/vss_signage/fixed/signage1.png
-- 広報固定表示ポスター：https://virtualaviationjapan.github.io/vss_signage/fixed/signage2.png
+- 広報固定表示ポスターのA,B：https://virtualaviationjapan.github.io/vss_signage/fixed/signage2.png
+- 広報固定表示ポスターのC,D：https://virtualaviationjapan.github.io/vss_signage/fixed/signage3.png
 ### 固定表示のコンフィグ（枚数、ファイルパス）変更  
   **注意：通常はこの操作を行わないでください。**  
   ここを触る場合、おそらくワールドビルドを必要とします。ワールド班にお問い合わせください。  
