@@ -52,6 +52,7 @@ GitHub Actionsにより、画像を自動でアトラス化してGitHub Pagesに
   1.  `const.js`を編集します。  
   2.  `FIXED_SIGNAGES`は固定掲示する画像に関するオブジェクトの配列です。  
   3.  `name`は生成される画像のファイル名です。`pieces`は画像に結合するテクスチャ枚数を1,2,4(枚)から選択します。`images`はリポジトリルートからのファイルパスの配列です。
+  4.  `pieces`は1,2,4から選択しますが、万が一それ以外の値またはnullだった場合、4が選択されます。
    ```json
    {
      "name": "sample.png",
@@ -62,11 +63,20 @@ GitHub Actionsにより、画像を自動でアトラス化してGitHub Pagesに
        "fixed/sample3.png",
        "fixed/example.png"
      ]
+   }
+   {
        "name": "sample2.png",
        "pieces": 2,
        "images": [
         "fixed/sample1.png",
         "fixed/sample2.png",
+     ]
+   }
+   {
+       "name": "sample3.png",
+       "pieces": 1,
+       "images": [
+        "fixed/sample1.png",
      ]
    }
    ```
