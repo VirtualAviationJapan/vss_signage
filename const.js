@@ -14,33 +14,17 @@ export const FIXED_SIGNAGES = [
     },
     {
         name: 'signage2.png',
-        pieces: 4,
+        pieces: 2,
         images: [
             'fixed/poster_A.png',
             'fixed/poster_B.png',
-            'fixed/poster_C.png',
-            'fixed/poster_D.png'
         ]
     },
     {
         name: 'signage3.png',
         pieces: 2,
         images: [
-            'fixed/poster_A.png',
-            'fixed/poster_B.png'
+            'fixed/poster_C.png',
+            'fixed/poster_D.png'
         ]
     },
-    {
-        name: 'signage4.png',
-        pieces: 1,
-        images: [
-            'fixed/poster_A.png'
-        ]
-    },
-    {
-        name: 'signage5.png',
-        images: [
-            'fixed/poster_A.png'
-        ]
-    }
-]
