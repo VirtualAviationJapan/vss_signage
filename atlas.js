@@ -16,9 +16,7 @@ async function createSlideshowAtlas(dir) {
             const images = [];
             const imagePaths = [
                 path.join(dir, 'A', `slide${slideNumber}.png`),
-                path.join(dir, 'B', `slide${slideNumber}.png`),
-                path.join(dir, 'C', `slide${slideNumber}.png`),
-                path.join(dir, 'D', `slide${slideNumber}.png`)
+                path.join(dir, 'B', `slide${slideNumber}.png`)
             ];
 
             for (const imagePath of imagePaths) {
@@ -31,7 +29,7 @@ async function createSlideshowAtlas(dir) {
             }
             const outputPath = path.join(OUTPUT_DIR, dir, `slide${slideNumber}.png`);
             console.log(images, outputPath);
-            await createAtlas(images, outputPath);
+            await createAtlas2(images, outputPath);
         }));
     } catch (error) {
         console.error(`Error creating slideshow atlas for ${dir}:`, error);
@@ -43,38 +41,71 @@ async function createFixedAtlas(signage) {
     try {
         const outputPath = path.join(OUTPUT_DIR, 'fixed', signage.name)
         console.log(signage.images, outputPath);
-        await createAtlas(signage.images, outputPath);
+        switch (signage.pieces) {
+            case 1:
+                await createAtlas1(signage.images, outputPath);
+                break;
+            case 2:
+                await createAtlas2(signage.images, outputPath);
+                break;
+            case 4:
+                await createAtlas4(signage.images, outputPath);
+                break;
+            default:
+                await createAtlas4(signage.images, outputPath);
+                break;
+        }
     } catch (error) {
         console.error(`Error creating fixed atlas for ${signage.name}:`, error);
     }
 }
 
-async function createAtlas(images, outputPath) {
-    try{
-        // 画像をリサイズして正方形に並べる
+// resize
+async function resizeImage(image, width, height) {
+    return sharp(image)
+        .resize(width, height, {
+            fit: 'fill',
+            background: { r: 0, g: 0, b: 0, alpha: 0 }
+        })
+        .toBuffer();
+}
+
+async function createAtlas1(images, outputPath) {
+    try {
+        const width  = Math.ceil( ATLAS_SIZE );
+        const height = Math.ceil( ATLAS_SIZE );
         const resizedImages = await Promise.all(images.map(image =>
-            sharp(`${image}`)
-                .resize(IMAGE_SIZE, IMAGE_SIZE, {
-                    fit: 'fill',
-                    background: { r: 0, g: 0, b: 0, alpha: 0 }
-                })
-                .toBuffer()
+            resizeImage(image, IMAGE_SIZE, IMAGE_SIZE)
         ));
 
-        if(resizedImages.length < 4) {
-            const defaultImage = await sharp(DEFAULT_IMAGE)
-                .resize(IMAGE_SIZE, IMAGE_SIZE, {
-                    fit: 'fill',
-                    background: { r: 0, g: 0, b: 0, alpha: 0 }
-                })
-                .toBuffer();
-            for (let i = resizedImages.length; i < 4; i++) {
-                resizedImages.push(defaultImage);
+        await sharp({
+            create: {
+                width: ATLAS_SIZE,
+                height: ATLAS_SIZE,
+                channels: 4,
+                background: { r: 0, g: 0, b: 0, alpha: 0 }
             }
-        }
+        })
+            .composite([
+                { input: resizedImages[0], top: 0, left: 0 }
+            ])
+            .toFile(outputPath);
 
-        // 2x2の画像を生成
-        const atlas = await sharp({
+        console.log(`Atlas for ${outputPath} created successfully!`);
+    } catch (error) {
+        console.error(`Error creating atlas:`, error);
+    }
+}
+
+async function createAtlas2(images, outputPath) {
+    try {
+        const width  = Math.ceil( ATLAS_SIZE / 2 );
+        const height = Math.ceil( ATLAS_SIZE );
+        const resizedImages = await Promise.all(images.map(image =>
+            resizeImage(image, width, height)
+        ));
+
+        await sharp({
             create: {
                 width: ATLAS_SIZE,
                 height: ATLAS_SIZE,
@@ -84,9 +115,45 @@ async function createAtlas(images, outputPath) {
         })
             .composite([
                 { input: resizedImages[0], top: 0, left: 0 },
-                { input: resizedImages[1], top: 0, left: IMAGE_SIZE },
-                { input: resizedImages[2], top: IMAGE_SIZE, left: 0 },
-                { input: resizedImages[3], top: IMAGE_SIZE, left: IMAGE_SIZE }
+                { input: resizedImages[1], top: 0, left: width },
+            ])
+            .toFile(outputPath);
+
+        console.log(`Atlas for ${outputPath} created successfully!`);
+    } catch (error) {
+        console.error(`Error creating atlas:`, error);
+    }
+}
+async function createAtlas4(images, outputPath) {
+    try{
+        const width  = Math.ceil( ATLAS_SIZE / 2 );
+        const height = Math.ceil( ATLAS_SIZE / 2 );
+        // 画像をリサイズして正方形に並べる
+        const resizedImages = await Promise.all(images.map(image =>
+            resizeImage(image, width, height)
+        ));
+
+        if(resizedImages.length < 4) {
+            const defaultImage = await resizeImage(DEFAULT_IMAGE, width, height);
+            for (let i = resizedImages.length; i < 4; i++) {
+                resizedImages.push(defaultImage);
+            }
+        }
+
+        // 2x2の画像を生成
+        await sharp({
+            create: {
+                width: ATLAS_SIZE,
+                height: ATLAS_SIZE,
+                channels: 4,
+                background: { r: 0, g: 0, b: 0, alpha: 0 }
+            }
+        })
+            .composite([
+                { input: resizedImages[0], top: 0, left: 0 },
+                { input: resizedImages[1], top: 0, left: width },
+                { input: resizedImages[2], top: height, left: 0 },
+                { input: resizedImages[3], top: height, left: width }
             ])
             .toFile(outputPath);
 
