@@ -32,9 +32,10 @@ export const FIXED_SIGNAGES = [
     },
     {
         name: 'signage4.png',
-        pieces: 1,
+        pieces: 2,
         images: [
-            'fixed/poster_A.png'
+            'fixed/poster_C.png',
+            'fixed/poster_D.png'
         ]
     },
     {
