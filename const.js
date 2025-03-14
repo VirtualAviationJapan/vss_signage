@@ -38,10 +38,4 @@ export const FIXED_SIGNAGES = [
             'fixed/poster_D.png'
         ]
     },
-    {
-        name: 'signage5.png',
-        images: [
-            'fixed/poster_A.png'
-        ]
-    }
 ]
