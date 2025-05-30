@@ -11,7 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@9",
+  "packageManager": "pnpm@10.8.0",
   "dependencies": {
     "sharp": "^0.33.5"
   }
