@@ -8,7 +8,9 @@ updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    cooldown:
+      default-days: 5
   - package-ecosystem: "github-actions" # Check for updates to GitHub Actions every week
     directory: "/"
     schedule:
